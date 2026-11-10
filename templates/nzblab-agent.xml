@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>NASlab-Agent</Name>
+  <Repository>ghcr.io/tuxxler/nzblab-agent:latest</Repository>
+  <Registry>https://github.com/Tuxxler/nzblab-agent/pkgs/container/nzblab-agent</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>&lt;&lt;FORUM-LINK&gt;&gt;</Support>
+  <Project>https://github.com/Tuxxler/nzblab-agent</Project>
+  <ReadMe>https://github.com/Tuxxler/nzblab-agent#readme</ReadMe>
+  <License>PolyForm Shield 1.0.0 (source code publicly viewable on GitHub; free to use, not for competing products)</License>
+  <Overview>Read-only monitoring agent for the NASlab Android app. It measures your server every 30 seconds (temperature sensors, CPU load, GPU usage, RAM, network, disk spin-ups and which programs caused them, top processes, cache usage per share) and keeps a file index for searching all shares. History: 8 days at full resolution, 2 years of hourly values, stored in /config.&#xD;
+&#xD;
+It never changes anything on your server: every host path is mounted read-only, only /config is writable, root is dropped after start (PUID/PGID), and the container runs read-only with almost all capabilities removed. Optional and off by default: SMART values (NZBLAB_SMART), backup discovery for extra paths (NZBLAB_BACKUP_PATHS), redacted log excerpts (NZBLAB_LOGS). Service discovery (Sonarr, Radarr, Prowlarr, SABnzbd, Tautulli, Overseerr/Jellyseerr) reads API keys from appdata read-only and hands them to the app over the token-protected API; Plex tokens are never read; turn it off with DISCOVER_KEYS=0. The agent never updates itself.&#xD;
+&#xD;
+After the first start, open the container log: the line "NZBLab-Agent Token: ..." appears once. Paste the token into the app (Settings, Server connections, NASlab-Agent). The token is also stored in appdata/nzblab-agent/token.txt. A read-only browser dashboard runs on port 8099. Do not expose this port to the internet; use a VPN (WireGuard, Tailscale) when away from home.&#xD;
+&#xD;
+License: the agent is free and its source code is publicly viewable on GitHub under the PolyForm Shield 1.0.0 license (not an OSI-approved open source license: you may use, read and modify it, but not use it for a competing product). The NASlab app is a separate, closed-source Android app (Google Play).&#xD;
+&#xD;
+Deutsch: Misst Temperaturen, CPU, Grafikchip, RAM und Plattenzugriffe rund um die Uhr für die NASlab-App. Nur lesen, ändert nichts am NAS. Den Token zeigt das Container-Log beim ersten Start einmal, danach steht er in appdata/nzblab-agent/token.txt.</Overview>
+  <Category>Tools:System</Category>
+  <WebUI>http://[IP]:[PORT:8099]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Tuxxler/unraid-templates/main/templates/nzblab-agent.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Tuxxler/unraid-templates/main/icons/nzblab-agent.png</Icon>
+  <ExtraParams>--memory=512m --cpus=1 --read-only --tmpfs /tmp --security-opt no-new-privileges:true --cap-drop=ALL --cap-add=CHOWN --cap-add=DAC_OVERRIDE --cap-add=FOWNER --cap-add=SETUID --cap-add=SETGID</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>The NASlab Android app (Google Play). Unraid 6.12 or newer.</Requires>
+  <Config Name="Web/API port" Target="8099" Default="8099" Mode="tcp" Description="Port for the app and the browser dashboard" Type="Port" Display="always" Required="true" Mask="false">8099</Config>
+  <Config Name="Data (/config)" Target="/config" Default="/mnt/user/appdata/nzblab-agent" Mode="rw" Description="Required, read/write. The agent stores its token and history here; without it you get a new token after every update. History (SQLite), file index, settings and token.txt. The only writable path." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/nzblab-agent</Config>
+  <Config Name="Shares (file index)" Target="/host/mnt/user" Default="/mnt/user" Mode="ro" Description="Read-only. Search across all shares, storage analysis, duplicates, media inventory, appdata sizes. appdata, system, domains and isos are skipped by the index." Type="Path" Display="always" Required="false" Mask="false">/mnt/user</Config>
+  <Config Name="Cache pool" Target="/host/mnt/cache" Default="/mnt/cache" Mode="ro" Description="Read-only. What is waiting for the mover, per share. Remove this path if you have no pool named 'cache' (more pools: variable CACHE_ROOTS)." Type="Path" Display="always" Required="false" Mask="false">/mnt/cache</Config>
+  <Config Name="Host /sys" Target="/host/sys" Default="/sys" Mode="ro" Description="Read-only. Temperature sensors and GPU." Type="Path" Display="advanced" Required="true" Mask="false">/sys</Config>
+  <Config Name="Host /proc" Target="/host/proc" Default="/proc" Mode="ro" Description="Read-only. CPU load, top programs, disk activity." Type="Path" Display="advanced" Required="true" Mask="false">/proc</Config>
+  <Config Name="Unraid notifications" Target="/host/notifications" Default="/tmp/notifications" Mode="ro" Description="Read-only. Unraid notifications for the 'Today' timeline." Type="Path" Display="advanced" Required="false" Mask="false">/tmp/notifications</Config>
+  <Config Name="System log" Target="/host/log" Default="/var/log" Mode="ro" Description="Read-only. Errors from syslog for the 'Today' timeline." Type="Path" Display="advanced" Required="false" Mask="false">/var/log</Config>
+  <Config Name="Docker container names" Target="/host/docker/containers" Default="/var/lib/docker/containers" Mode="ro" Description="Read-only. Container names in the 'top load' list. Needs PUID=0 (the files are readable by root only)." Type="Path" Display="advanced" Required="false" Mask="false">/var/lib/docker/containers</Config>
+  <Config Name="Time zone" Target="TZ" Default="Europe/Zurich" Mode="" Description="e.g. Europe/Berlin, America/New_York" Type="Variable" Display="always" Required="false" Mask="false">Europe/Zurich</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User the agent runs as after start (99 = nobody). 0 = root: needed only for container names and appdata folders of other containers with strict permissions." Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group (100 = users)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="Token (optional)" Target="NZBLAB_AGENT_TOKEN" Default="" Mode="" Description="Best leave empty: the agent creates a random token on first start (container log and appdata/nzblab-agent/token.txt). If you set your own: at least 32 random characters, no spaces (shorter values are refused)." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="Heat alert (C)" Target="HEAT_ALERT_C" Default="95" Mode="" Description="Push via ntfy when the CPU stays above this temperature (Celsius) for 5 minutes" Type="Variable" Display="advanced" Required="false" Mask="false">95</Config>
+  <Config Name="ntfy URL (optional)" Target="NTFY_URL" Default="" Mode="" Description="e.g. https://ntfy.sh/a-long-secret-topic for push alerts while away" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="SMART (optional)" Target="NZBLAB_SMART" Default="0" Mode="" Description="1 = read SMART values of the disks (model, serial, power-on hours, reallocated/pending sectors, CRC/media errors, wear, temperature). Read-only: smartctl --scan and smartctl -a -n standby only, never self-tests, never writes, sleeping disks stay asleep. Needs the disks as devices and SYS_RAWIO, e.g. Extra Parameters: --cap-add=SYS_RAWIO --device=/dev/sdb (NVMe also --cap-add=SYS_ADMIN). Leave PUID as is: a small root helper only runs smartctl. 0 = off." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Log excerpts (optional)" Target="NZBLAB_LOGS" Default="0" Mode="" Description="1 = the app may show recent error and warning lines from the System log path (/var/log, read-only). IP/MAC/e-mail addresses, tokens, passwords, user names and share paths are removed before anything leaves the agent; it never sends logs anywhere by itself. 0 = off." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Network latency" Target="NZBLAB_NET" Default="1" Mode="" Description="1 = every minute, measure the TCP connect time to the router and to 1.1.1.1:443 (no data is sent, no extra rights). Shows in the app whether the router or the internet is slow. 0 = off." Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
+  <Config Name="Find services and API keys" Target="DISCOVER_KEYS" Default="1" Mode="" Description="1 = the app can connect Sonarr, Radarr, Prowlarr, SABnzbd, Tautulli and Overseerr/Jellyseerr in one step: the agent reads their API key, port and URL base from the settings files in appdata (Shares path, read-only; no docker.sock). Only with the agent token, at most 10 requests per minute, never logged. Plex tokens are never read; Jellyfin/Emby keys must be created in their web UI. 0 = only list which services exist, without keys." Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
+  <Config Name="Backup paths (optional)" Target="NZBLAB_BACKUP_PATHS" Default="" Mode="" Description="Comma-separated container paths of backup repositories (restic, borg, kopia) or backup log files (rsync, scripts), e.g. /host/backup. Add each one as an extra read-only path first. Only file names and times are read, never the backup contents. Empty = only search the shares for backup folders." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="Listen address" Target="NZBLAB_BIND" Default="0.0.0.0" Mode="" Description="Address the agent listens on inside the container. Keep 0.0.0.0 with bridge networking; use the LAN address with host networking, or 127.0.0.1 behind a reverse proxy." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
+  <Config Name="Price country (optional)" Target="PRICE_COUNTRY" Default="" Mode="" Description="Disk prices: CH, DE, AT, US, GB, ... Usually set from the app. Empty = no price lookups." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+</Container>

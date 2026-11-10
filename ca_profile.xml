@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<CommunityApplications>
+  <!-- Repository profile for Unraid Community Applications (https://ca.unraid.net/submit/help). -->
+  <Profile>Templates by Tuxxler, the maker of the **NASlab** Android app (NAS and home-server companion for Unraid, TrueNAS, Synology and Linux).
+
+Currently one app: **NASlab-Agent**, a small read-only monitoring container for the NASlab app. It measures temperatures, CPU, GPU, RAM, network, disk spin-ups and keeps a file index of your shares. It never changes anything on your server: all host paths are mounted read-only, only `/config` is writable, root is dropped after start.
+
+The agent is free. Its source code is publicly viewable at https://github.com/Tuxxler/nzblab-agent under the PolyForm Shield 1.0.0 license (not OSI-approved: free to use, read and modify, but not for competing products). The templates in this repository are MIT. The NASlab app itself is a separate, closed-source Android app on Google Play.
+
+Support: the forum thread linked below. Issues and questions about the agent code: GitHub issues in the agent repository.</Profile>
+  <Icon>https://raw.githubusercontent.com/Tuxxler/unraid-templates/main/icons/nzblab-agent.png</Icon>
+  <WebPage>https://github.com/Tuxxler/nzblab-agent</WebPage>
+  <Forum>&lt;&lt;FORUM-LINK&gt;&gt;</Forum>
+</CommunityApplications>

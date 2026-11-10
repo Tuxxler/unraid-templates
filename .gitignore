@@ -1,0 +1,5 @@
+.DS_Store
+Thumbs.db
+*.swp
+# internal, German, stays local
+CHECKLISTE.md
