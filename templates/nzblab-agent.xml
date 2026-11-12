@@ -10,14 +10,14 @@
   <Support>&lt;&lt;FORUM-LINK&gt;&gt;</Support>
   <Project>https://github.com/Tuxxler/nzblab-agent</Project>
   <ReadMe>https://github.com/Tuxxler/nzblab-agent#readme</ReadMe>
-  <License>PolyForm Shield 1.0.0 (source code publicly viewable on GitHub; free to use, not for competing products)</License>
+  <License>AGPL-3.0-only</License>
   <Overview>Read-only monitoring agent for the NASlab Android app. It measures your server every 30 seconds (temperature sensors, CPU load, GPU usage, RAM, network, disk spin-ups and which programs caused them, top processes, cache usage per share) and keeps a file index for searching all shares. History: 8 days at full resolution, 2 years of hourly values, stored in /config.&#xD;
 &#xD;
 It never changes anything on your server: every host path is mounted read-only, only /config is writable, root is dropped after start (PUID/PGID), and the container runs read-only with almost all capabilities removed. Optional and off by default: SMART values (NZBLAB_SMART), backup discovery for extra paths (NZBLAB_BACKUP_PATHS), redacted log excerpts (NZBLAB_LOGS). Service discovery (Sonarr, Radarr, Prowlarr, SABnzbd, Tautulli, Overseerr/Jellyseerr) reads API keys from appdata read-only and hands them to the app over the token-protected API; Plex tokens are never read; turn it off with DISCOVER_KEYS=0. The agent never updates itself.&#xD;
 &#xD;
 After the first start, open the container log: the line "NZBLab-Agent Token: ..." appears once. Paste the token into the app (Settings, Server connections, NASlab-Agent). The token is also stored in appdata/nzblab-agent/token.txt. A read-only browser dashboard runs on port 8099. Do not expose this port to the internet; use a VPN (WireGuard, Tailscale) when away from home.&#xD;
 &#xD;
-License: the agent is free and its source code is publicly viewable on GitHub under the PolyForm Shield 1.0.0 license (not an OSI-approved open source license: you may use, read and modify it, but not use it for a competing product). The NASlab app is a separate, closed-source Android app (Google Play).&#xD;
+License: the agent is free and open source (GNU AGPL-3.0-only), source code on GitHub. The NASlab app is a separate, closed-source Android app (Google Play).&#xD;
 &#xD;
 Deutsch: Misst Temperaturen, CPU, Grafikchip, RAM und Plattenzugriffe rund um die Uhr für die NASlab-App. Nur lesen, ändert nichts am NAS. Den Token zeigt das Container-Log beim ersten Start einmal, danach steht er in appdata/nzblab-agent/token.txt.</Overview>
   <Category>Tools:System</Category>

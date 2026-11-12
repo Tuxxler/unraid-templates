@@ -25,7 +25,7 @@ Do not expose port 8099 to the internet; use a VPN (WireGuard, Tailscale) away f
 ## Licenses, stated plainly
 
 - **This repository** (templates, profile, icon): [MIT](LICENSE).
-- **The agent** (`ghcr.io/tuxxler/nzblab-agent`, source at <https://github.com/Tuxxler/nzblab-agent>): free, source code publicly viewable, **PolyForm Shield 1.0.0**. That is *not* an OSI-approved open source license: you may use it (also commercially), read and modify it, but not use it for a product that competes with the NASlab app or agent.
+- **The agent** (`ghcr.io/tuxxler/nzblab-agent`, source at <https://github.com/Tuxxler/nzblab-agent>): free and open source, **GNU AGPL-3.0-only** (OSI-approved). You may use it (also commercially), read and modify it; if you distribute a modified version or offer it as a network service, you must publish your changes under the same license.
 - **The NASlab app**: separate, closed-source Android app on Google Play (closed test now, public launch planned).
 
 ## Support
