@@ -32,4 +32,4 @@ Do not expose port 8099 to the internet; use a VPN (WireGuard, Tailscale) away f
 
 ## Support
 
-Forum thread: <<FORUM-LINK>> · Agent code and issues: <https://github.com/Tuxxler/nzblab-agent>
+Forum thread: https://github.com/Tuxxler/nzblab-agent/issues · Agent code and issues: <https://github.com/Tuxxler/nzblab-agent>
