@@ -7,7 +7,7 @@ Currently one app: **NASlab-Agent**, a small read-only monitoring container for 
 
 The agent is free. It is open source (GNU AGPL-3.0-only): https://github.com/Tuxxler/nzblab-agent . The templates in this repository are MIT. The NASlab app itself is a separate, closed-source Android app on Google Play.
 
-Support: the forum thread linked below. Issues and questions about the agent code: GitHub issues in the agent repository.</Profile>
+Support, questions and bug reports: GitHub issues in the agent repository (linked below).</Profile>
   <Icon>https://raw.githubusercontent.com/Tuxxler/unraid-templates/main/icons/nzblab-agent.png</Icon>
   <WebPage>https://github.com/Tuxxler/nzblab-agent</WebPage>
   <Forum>https://github.com/Tuxxler/nzblab-agent/issues</Forum>
