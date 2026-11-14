@@ -2,4 +2,7 @@
 Thumbs.db
 *.swp
 # internal, German, stays local
+intern/
 CHECKLISTE.md
+FORUM-POST.md
+SANDRO-SCHRITTE.md

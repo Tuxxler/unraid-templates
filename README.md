@@ -19,6 +19,8 @@ Unraid Community Applications (CA) templates for apps made by Tuxxler.
 3. **Apply.** Open the container **Logs**: the line `NZBLab-Agent Token: …` appears once.
 4. In the app: *Settings › Server connections › NASlab-Agent* › address `http://<unraid-ip>:8099` › paste the token › **Check**.
 
+Network: the default *Bridge* is enough. Only for the optional home-network device list (`NZBLAB_LAN=1`) switch *Network Type* to *Host* and set *Listen address* to your server address.
+
 All host paths are mounted **read-only**; only `/config` is writable. After start the agent drops root and runs as `PUID`/`PGID` (99/100).
 Do not expose port 8099 to the internet; use a VPN (WireGuard, Tailscale) away from home.
 
