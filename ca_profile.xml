@@ -10,5 +10,5 @@ The agent is free. It is open source (GNU AGPL-3.0-only): https://github.com/Tux
 Support: the forum thread linked below. Issues and questions about the agent code: GitHub issues in the agent repository.</Profile>
   <Icon>https://raw.githubusercontent.com/Tuxxler/unraid-templates/main/icons/nzblab-agent.png</Icon>
   <WebPage>https://github.com/Tuxxler/nzblab-agent</WebPage>
-  <Forum>&lt;&lt;FORUM-LINK&gt;&gt;</Forum>
+  <Forum>https://github.com/Tuxxler/nzblab-agent/issues</Forum>
 </CommunityApplications>

@@ -9,7 +9,7 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>&lt;&lt;FORUM-LINK&gt;&gt;</Support>
+  <Support>https://github.com/Tuxxler/nzblab-agent/issues</Support>
   <Project>https://github.com/Tuxxler/nzblab-agent</Project>
   <ReadMe>https://github.com/Tuxxler/nzblab-agent#readme</ReadMe>
   <License>AGPL-3.0-only</License>
