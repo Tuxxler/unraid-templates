@@ -8,16 +8,16 @@ Unraid Community Applications (CA) templates for apps made by Tuxxler.
 
 ## Install
 
-**From Community Applications (once accepted):** Apps › search **NASlab-Agent** › **Install** › **Apply**.
+**From Community Applications:** Apps › search **NASlab-Agent** › **Install** › **Apply**.
 
-**Without CA (works today):**
+**Without CA (alternative):**
 
 1. Unraid › **Docker** › scroll down to **Template repositories** › add the line
    `https://github.com/Tuxxler/unraid-templates` › **Save**.
 2. **Add Container** › *Template*: pick **NASlab-Agent**. Check the paths (remove *Cache pool* if you have no pool named `cache`).
    Keep *Data (/config)* → `/mnt/user/appdata/nzblab-agent` (read/write): the agent stores its token and history there.
-3. **Apply.** Open the container **Logs**: the line `NZBLab-Agent Token: …` appears once.
-4. In the app: *Settings › Server connections › NASlab-Agent* › address `http://<unraid-ip>:8099` › paste the token › **Check**.
+3. **Apply.** Open the container **Logs**: the line `NZBLab-Agent Token: …` appears once, and the certificate fingerprint.
+4. In the app: *Settings › Server connections › NASlab-Agent* › address `https://<unraid-ip>:8099` › paste the token › **Check**. The agent uses its own certificate, so a browser warns once; compare the fingerprint with the container log. Set up the app within 30 minutes after the container starts (service keys are only handed out in that window); otherwise restart the container.
 
 Network: the default *Bridge* is enough. Only for the optional home-network device list (`NZBLAB_LAN=1`) switch *Network Type* to *Host* and set *Listen address* to your server address.
 
@@ -32,4 +32,4 @@ Do not expose port 8099 to the internet; use a VPN (WireGuard, Tailscale) away f
 
 ## Support
 
-Forum thread: https://github.com/Tuxxler/nzblab-agent/issues · Agent code and issues: <https://github.com/Tuxxler/nzblab-agent>
+Support and bug reports (GitHub issues): https://github.com/Tuxxler/nzblab-agent/issues · Agent code: <https://github.com/Tuxxler/nzblab-agent>
