@@ -17,7 +17,7 @@ Unraid Community Applications (CA) templates for apps made by Tuxxler.
 2. **Add Container** › *Template*: pick **NASlab-Agent**. Check the paths (remove *Cache pool* if you have no pool named `cache`).
    Keep *Data (/config)* → `/mnt/user/appdata/nzblab-agent` (read/write): the agent stores its token and history there.
 3. **Apply.** Open the container **Logs**: the line `NZBLab-Agent Token: …` appears once, and the certificate fingerprint.
-4. In the app: *Settings › Server connections › NASlab-Agent* › address `https://<unraid-ip>:8099` › paste the token › **Check**. The agent uses its own certificate, so a browser warns once; compare the fingerprint with the container log. Set up the app within 30 minutes after the container starts (service keys are only handed out in that window); otherwise restart the container.
+4. In the app: *Settings › Server connections › NASlab-Agent* › address `https://<unraid-ip>:8099` › paste the token › **Check**. The agent uses its own certificate, so a browser warns once; compare the fingerprint with the container log. Set up the app within 30 minutes after the container starts (service keys are only handed out in that window); otherwise restart the container. After keys were handed out once, a restart no longer opens the window: create an empty file `keys-unlock` in the appdata folder instead (opens it for 10 minutes).
 
 Network: the default *Bridge* is enough. Only for the optional home-network device list (`NZBLAB_LAN=1`) switch *Network Type* to *Host* and set *Listen address* to your server address.
 
