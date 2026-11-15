@@ -13,7 +13,8 @@
   <Project>https://github.com/Tuxxler/nzblab-agent</Project>
   <ReadMe>https://github.com/Tuxxler/nzblab-agent#readme</ReadMe>
   <License>AGPL-3.0-only</License>
-  <Overview>Read-only monitoring agent for the NASlab Android app. It measures your server every 30 seconds (temperature sensors, CPU load, GPU usage, RAM, network, disk spin-ups and which programs caused them, top processes, cache usage per share) and keeps a file index for searching all shares. History: 8 days at full resolution, 2 years of hourly values, stored in /config.&#xD;
+  <Overview>Getting the app: NASlab is coming to the Google Play Store in the next few days. Until then it is in a closed test, see https://tuxxler.github.io/nzblab/en/#play&#xD;
+Read-only monitoring agent for the NASlab Android app. It measures your server every 30 seconds (temperature sensors, CPU load, GPU usage, RAM, network, disk spin-ups and which programs caused them, top processes, cache usage per share) and keeps a file index for searching all shares. History: 8 days at full resolution, 2 years of hourly values, stored in /config.&#xD;
 &#xD;
 Beta: tested on Unraid 7 (amd64); arm64 untested.&#xD;
 &#xD;
@@ -21,7 +22,7 @@ It never changes anything on your server: every host path is mounted read-only, 
 &#xD;
 Network mode: the default Bridge works for everything. Only if you want the optional device list of your home network (NZBLAB_LAN=1) or the real network cards, switch Network Type to Host (optional) and then set Listen address to your server address. Without it, the agent only sees the Docker network.&#xD;
 &#xD;
-After the first start, open the container log: the line "NZBLab-Agent Token: ..." appears once. Paste the token into the app (Settings, Server connections, NASlab-Agent). The token is also stored in appdata/nzblab-agent/token.txt. A read-only browser dashboard runs on port 8099. Do not expose this port to the internet; use a VPN (WireGuard, Tailscale) when away from home.&#xD;
+After the first start, open the container log: the line "NZBLab-Agent Token: ..." appears once. Paste the token into the app (Settings, Server connections, NASlab-Agent). The token is also stored in appdata/nzblab-agent/token.txt. A read-only browser dashboard runs on port 8099 (HTTPS with a self-generated certificate: your browser warns once, compare the fingerprint shown in the container log). Do not expose this port to the internet; use a VPN (WireGuard, Tailscale) when away from home.&#xD;
 &#xD;
 License: the agent is free and open source (GNU AGPL-3.0-only), source code on GitHub. The NASlab app is a separate, closed-source Android app (Google Play).&#xD;
 &#xD;
@@ -43,7 +44,7 @@ Deutsch: Misst Temperaturen, CPU, Grafikchip, RAM und Plattenzugriffe rund um di
 1.16.1: token hardening (min. 32 characters), crashes endpoint needs the token, parser limits.
 1.16.0: service discovery (Sonarr, Radarr, Prowlarr, SABnzbd, Tautulli, Overseerr) for one-step setup in the app.
 1.15.0: reboot history, per-disk temperatures, RAID/pool status, network latency, backup discovery, optional SMART and log excerpts.</Changes>
-  <Requires>The NASlab Android app (Google Play). Unraid 6.12 or newer.</Requires>
+  <Requires>The NASlab Android app (coming to Google Play soon, closed test until then: https://tuxxler.github.io/nzblab/en/#play). Unraid 6.12 or newer.</Requires>
   <Config Name="Web/API port" Target="8099" Default="8099" Mode="tcp" Description="Port for the app and the browser dashboard" Type="Port" Display="always" Required="true" Mask="false">8099</Config>
   <Config Name="Data (/config)" Target="/config" Default="/mnt/user/appdata/nzblab-agent" Mode="rw" Description="Required, read/write. The agent stores its token and history here; without it you get a new token after every update. History (SQLite), file index, settings and token.txt. The only writable path." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/nzblab-agent</Config>
   <Config Name="Shares (file index)" Target="/host/mnt/user" Default="/mnt/user" Mode="ro" Description="Read-only. Search across all shares, storage analysis, duplicates, media inventory, appdata sizes. appdata, system, domains and isos are skipped by the index." Type="Path" Display="always" Required="false" Mask="false">/mnt/user</Config>
