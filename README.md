@@ -21,7 +21,7 @@ Unraid Community Applications (CA) templates for apps made by Tuxxler.
 
 Network: the default *Bridge* is enough. Only for the optional home-network device list (`NZBLAB_LAN=1`) switch *Network Type* to *Host* and set *Listen address* to your server address.
 
-All host paths are mounted **read-only**; only `/config` is writable. After start the agent drops root and runs as `PUID`/`PGID` (99/100).
+All host paths are mounted **read-only**; only `/config` is writable. After start the agent drops root and runs as `PUID`/`PGID` (8099/100: its own number, not the one other containers such as nobody 99 use).
 Do not expose port 8099 to the internet; use a VPN (WireGuard, Tailscale) away from home.
 
 ## Licenses, stated plainly
